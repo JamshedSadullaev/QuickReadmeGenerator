@@ -1,35 +1,36 @@
 const fs= require("fs/promises");
 const inquirer =require("inquirer");
-const generateRADME = require('./Develop/utils/generateMarkdown')
+const generateREADME = require('./Develop/utils/generateMarkdown');
+// const util = require('./Develop/utils');
 
-const templateGenerator = ({title,description,license,question,installation,github}) =>{
-    return `
-    ${title}
-    ![badge](https://img.shields.io/badge/license-${license}-brightgreen)<br />
-    ##Table of Content
-    -[Project description](#Description)
-    -[Usage](#Usage)
-    -[Installation](#Installation)
-    -[License](#License)
+// const templateGenerator = ({title,description,license,question,installation,github}) =>{
+//     return `
+//     ${title}
+//     ![badge](https://img.shields.io/badge/license-${license}-brightgreen)<br />
+//     ##Table of Content
+//     -[Project description](#Description)
+//     -[Usage](#Usage)
+//     -[Installation](#Installation)
+//     -[License](#License)
   
-    ## Description
-    ${description}
+//     ## Description
+//     ${description}
   
-    ## License
-    ${license}
+//     ## License
+//     ${license}
   
-    ## Question 
-    ${question}
+//     ## Question 
+//     ${question}
   
-    ## Installation
-    ${installation}
+//     ## Installation
+//     ${installation}
   
   
   
-    ## Contact <br/>
-    Here is my Github name ${github}<br/>
-  `;
-}
+//     ## Contact <br/>
+//     Here is my Github name ${github}<br/>
+//   `;
+// }
 // fs.writeFile("README.md","test") 
 // .then(() =>console.log("Success"))
 // .catch((e)=>console.log(e));
@@ -44,12 +45,7 @@ inquirer.prompt([
         message:"Write some description about the project?",
         name:"description"
     },
-    {
-        type:"input",
-        message:"Choose to add the license?",
-        name:"license",
-        choices:["MIT","ISC","GNUPLv3"],
-    },
+
     {
         type:"input",
         message:"What does this project do?",
@@ -57,18 +53,32 @@ inquirer.prompt([
     },
     {
         type:"input",
-        message:"Do you want to add Installation?",
+        message:"How can one install this project?",
         name:"installation"
+    },
+    {
+        type:"list",
+        message:"Choose to add the license?",
+        choices:["MIT","BSD","Boost","Apache"],
+        name:"license",
+        
     },
     {
         type:"input",
         message:"What is your github name?",
         name:"github"
     },
-]).then((answer)=>{
-    const generateRADME = templateGenerator(answer);
-    fs.writeFile('README.md',generateRADME,(err)=>
-    err ? console.log(err):console.log('README created')
-    );
+])
+// function init() {
+
+    .then((answer)=>{
+    const genREADME = generateREADME(answer);
+    fs.writeFile('EXAMPLE.md',genREADME);
 
 } );
+// }
+// init();
+function init() {}
+
+// Function call to initialize app
+init();
