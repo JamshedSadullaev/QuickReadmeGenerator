@@ -1,39 +1,7 @@
 const fs= require("fs/promises");
 const inquirer =require("inquirer");
 const generateREADME = require('./Develop/utils/generateMarkdown');
-// const util = require('./Develop/utils');
-
-// const templateGenerator = ({title,description,license,question,installation,github}) =>{
-//     return `
-//     ${title}
-//     ![badge](https://img.shields.io/badge/license-${license}-brightgreen)<br />
-//     ##Table of Content
-//     -[Project description](#Description)
-//     -[Usage](#Usage)
-//     -[Installation](#Installation)
-//     -[License](#License)
-  
-//     ## Description
-//     ${description}
-  
-//     ## License
-//     ${license}
-  
-//     ## Question 
-//     ${question}
-  
-//     ## Installation
-//     ${installation}
-  
-  
-  
-//     ## Contact <br/>
-//     Here is my Github name ${github}<br/>
-//   `;
-// }
-// fs.writeFile("README.md","test") 
-// .then(() =>console.log("Success"))
-// .catch((e)=>console.log(e));
+// question line
 inquirer.prompt([
     {
         type:"input",
@@ -69,16 +37,15 @@ inquirer.prompt([
         name:"github"
     },
 ])
-// function init() {
 
+// it will put answers to generatMarkdown.js file and writes to EXAMPLE.md file
     .then((answer)=>{
     const genREADME = generateREADME(answer);
     fs.writeFile('EXAMPLE.md',genREADME);
 
 } );
-// }
-// init();
+
 function init() {}
 
-// Function call to initialize app
+
 init();
